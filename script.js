@@ -67,30 +67,67 @@ window.addEventListener('scroll', () => {
     lastScroll = currentScroll;
 });
 
-// Form submission handler
-const contactForm = document.querySelector('.contact-form form');
+// Contact Form Handler
+const contactForm = document.getElementById('contact-form');
+const formMessage = document.getElementById('form-message');
+
+// Handle form submission
 if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        // Get form values
+        const submitBtn = document.getElementById('submit-btn');
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+        
         const formData = new FormData(contactForm);
-        const name = contactForm.querySelector('input[type="text"]').value;
-        const email = contactForm.querySelector('input[type="email"]').value;
-        const phone = contactForm.querySelector('input[type="tel"]').value;
-        const message = contactForm.querySelector('textarea').value;
-
-        // Simple validation
-        if (!name || !email || !message) {
-            alert('Please fill in all required fields.');
-            return;
+        
+        try {
+            const response = await fetch('contact_form.php', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                formMessage.className = 'form-message success';
+                formMessage.textContent = data.message;
+                contactForm.reset();
+                formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } else {
+                formMessage.className = 'form-message error';
+                formMessage.textContent = data.message || 'An error occurred. Please try again.';
+                formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        } catch (error) {
+            formMessage.className = 'form-message error';
+            formMessage.textContent = 'An error occurred. Please try again or call us at (212) 555-1234.';
+            formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
         }
-
-        // Here you would typically send the data to a server
-        // For now, we'll just show a success message
-        alert('Thank you for your message! We\'ll get back to you soon.');
-        contactForm.reset();
     });
+}
+
+// Handle URL parameters for success/error messages (from redirect)
+if (window.location.search) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const status = urlParams.get('status');
+    const msg = urlParams.get('msg');
+    
+    if (status && msg && formMessage) {
+        formMessage.className = `form-message ${status}`;
+        formMessage.textContent = decodeURIComponent(msg);
+        
+        // Clean URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
 }
 
 // Animate elements on scroll (simple fade-in)

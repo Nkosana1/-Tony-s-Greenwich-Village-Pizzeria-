@@ -3,7 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us | Tony's Greenwich Village Pizzeria</title>
+    <title>Contact Us | Tony's Greenwich Village Pizzeria - Visit Us Today</title>
+    <meta name="description" content="Get in touch with Tony's Greenwich Village Pizzeria. Find our location, hours, phone number, and directions. We're located at 123 Bleecker St, New York, NY 10014.">
+    <link rel="canonical" href="https://www.tonysgreenwichvillagepizzeria.com/contact.html">
+    <meta property="og:title" content="Contact Us | Tony's Greenwich Village Pizzeria">
+    <meta property="og:description" content="Get in touch with Tony's. Find our location, hours, and contact information.">
+    <meta property="og:image" content="https://www.tonysgreenwichvillagepizzeria.com/images/contact-pizzeria.jpg">
+    <meta property="og:url" content="https://www.tonysgreenwichvillagepizzeria.com/contact.html">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -26,7 +36,58 @@
 
     <main>
         <section>
-            <!-- Contact Us page content will include contact form, location map, hours of operation, phone number, and directions -->
+            <div class="container">
+                <h1>Contact Us</h1>
+                
+                <div class="contact-grid">
+                    <div>
+                        <h2>Location & Hours</h2>
+                        <div class="contact-info-card contact-hours-card">
+                            <address>
+                                <strong>Tony's Greenwich Village Pizzeria</strong><br>
+                                123 Bleecker St<br>
+                                New York, NY 10014
+                            </address>
+                            <p><strong>Phone:</strong> <a href="tel:+12125551234">(212) 555-1234</a></p>
+                            <div class="hours-section">
+                                <h3>Hours of Operation</h3>
+                                <p><strong>Monday - Thursday:</strong> 11:00 AM - 10:00 PM</p>
+                                <p><strong>Friday - Saturday:</strong> 11:00 AM - 11:00 PM</p>
+                                <p><strong>Sunday:</strong> 12:00 PM - 9:00 PM</p>
+                            </div>
+                        </div>
+                        <div class="contact-info-card">
+                            <h3>Directions</h3>
+                            <p>We're located in the heart of Greenwich Village, just steps away from Washington Square Park. Take the A, B, C, D, E, F, or M train to West 4th Street, or the 6 train to Bleecker Street.</p>
+                            <p class="directions-note">Street parking is available, and we're also easily accessible by bus routes M5, M8, and M20.</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h2>Send Us a Message</h2>
+                        <form action="contact_form.php" method="POST" class="contact-form-wrapper" id="contact-form">
+                            <div id="form-message"></div>
+                            <div class="form-group">
+                                <label for="name">Name <span class="required">*</span></label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message <span class="required">*</span></label>
+                                <textarea id="message" name="message" required></textarea>
+                            </div>
+                            <button type="submit" id="submit-btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
@@ -40,6 +101,6 @@
             <p>&copy; 2024 Tony's Greenwich Village Pizzeria. All rights reserved.</p>
         </div>
     </footer>
+    <script src="script.js"></script>
 </body>
 </html>
-

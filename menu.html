@@ -3,7 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu & Toppings | Tony's Greenwich Village Pizzeria</title>
+    <title>Menu & Toppings | Tony's Greenwich Village Pizzeria - NYC's Best Pizza</title>
+    <meta name="description" content="Browse our menu of authentic New York-style pizzas including Margherita, Pepperoni, Supreme, White, and Veggie. Build your own pizza with our premium toppings selection.">
+    <link rel="canonical" href="https://www.tonysgreenwichvillagepizzeria.com/menu.html">
+    <meta property="og:title" content="Menu & Toppings | Tony's Greenwich Village Pizzeria">
+    <meta property="og:description" content="Browse our menu of authentic New York-style pizzas. Build your own pizza with premium toppings.">
+    <meta property="og:image" content="https://www.tonysgreenwichvillagepizzeria.com/images/menu-pizza.jpg">
+    <meta property="og:url" content="https://www.tonysgreenwichvillagepizzeria.com/menu.html">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -25,8 +35,83 @@
     </header>
 
     <main>
-        <section>
-            <!-- Menu & Toppings page content will include all pizza varieties, sizes, available toppings, calzones, appetizers, and salads with prices -->
+        <section class="menu-section">
+            <div class="container">
+                <h1>Our Menu</h1>
+                <p class="menu-intro">All pizzas available in 12" or 16" sizes. Made fresh daily with the finest ingredients.</p>
+                
+                <div class="pizza-list">
+                    <article class="pizza-item">
+                        <h3>Margherita</h3>
+                        <p class="description">A classic Italian favorite with fresh mozzarella, San Marzano tomato sauce, fresh basil leaves, and extra virgin olive oil. Simple, authentic, and delicious.</p>
+                        <span class="price">$18 - $24</span>
+                    </article>
+
+                    <article class="pizza-item">
+                        <h3>Pepperoni</h3>
+                        <p class="description">Our signature pepperoni pizza with premium spicy pepperoni, mozzarella cheese, and our house-made tomato sauce. A New York classic.</p>
+                        <span class="price">$20 - $26</span>
+                    </article>
+
+                    <article class="pizza-item">
+                        <h3>Supreme</h3>
+                        <p class="description">The ultimate combination: pepperoni, Italian sausage, mushrooms, green peppers, onions, and black olives. Loaded with flavor.</p>
+                        <span class="price">$28 - $34</span>
+                    </article>
+
+                    <article class="pizza-item">
+                        <h3>White Pizza</h3>
+                        <p class="description">Rich and creamy white pizza with ricotta cheese, mozzarella, fresh garlic, olive oil, and a sprinkle of black pepper. No sauce needed.</p>
+                        <span class="price">$22 - $28</span>
+                    </article>
+
+                    <article class="pizza-item">
+                        <h3>Veggie</h3>
+                        <p class="description">A garden-fresh delight with mushrooms, bell peppers, onions, black olives, spinach, and fresh tomatoes. Perfect for vegetarians.</p>
+                        <span class="price">$24 - $30</span>
+                    </article>
+                </div>
+
+                <div class="build-your-own">
+                    <h3>Build Your Own Pizza</h3>
+                    <p class="build-intro">Start with our classic 12" ($16) or 16" ($22) cheese pizza and add your favorite toppings. Each topping adds $2-$4.</p>
+                    <div class="toppings-list">
+                        <div class="topping-item">
+                            <input type="checkbox" id="pepperoni" name="topping" value="pepperoni">
+                            <label for="pepperoni">Pepperoni (+$3)</label>
+                        </div>
+                        <div class="topping-item">
+                            <input type="checkbox" id="sausage" name="topping" value="sausage">
+                            <label for="sausage">Italian Sausage (+$3)</label>
+                        </div>
+                        <div class="topping-item">
+                            <input type="checkbox" id="mushrooms" name="topping" value="mushrooms">
+                            <label for="mushrooms">Mushrooms (+$2)</label>
+                        </div>
+                        <div class="topping-item">
+                            <input type="checkbox" id="onions" name="topping" value="onions">
+                            <label for="onions">Onions (+$2)</label>
+                        </div>
+                        <div class="topping-item">
+                            <input type="checkbox" id="peppers" name="topping" value="peppers">
+                            <label for="peppers">Green Peppers (+$2)</label>
+                        </div>
+                        <div class="topping-item">
+                            <input type="checkbox" id="olives" name="topping" value="olives">
+                            <label for="olives">Black Olives (+$2)</label>
+                        </div>
+                        <div class="topping-item">
+                            <input type="checkbox" id="basil" name="topping" value="basil">
+                            <label for="basil">Fresh Basil (+$2)</label>
+                        </div>
+                        <div class="topping-item">
+                            <input type="checkbox" id="extra-cheese" name="topping" value="extra-cheese">
+                            <label for="extra-cheese">Extra Cheese (+$3)</label>
+                        </div>
+                    </div>
+                    <p class="custom-order-note">Call us at (212) 555-1234 to place your custom order!</p>
+                </div>
+            </div>
         </section>
     </main>
 
@@ -42,4 +127,3 @@
     </footer>
 </body>
 </html>
-
