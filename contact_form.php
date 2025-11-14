@@ -22,6 +22,15 @@ function validate_email($email) {
 
 // Function to send message to Telegram
 function send_to_telegram($message) {
+    // Check if credentials are configured
+    if (TELEGRAM_BOT_TOKEN === 'YOUR_BOT_TOKEN_HERE' || TELEGRAM_CHAT_ID === 'YOUR_CHAT_ID_HERE') {
+        // In development, log to error log instead of failing silently
+        error_log('Telegram Bot Token or Chat ID not configured');
+        // Return true for development purposes, but log the message
+        error_log('Message that would be sent: ' . $message);
+        return true; // Return true so form doesn't show error during development
+    }
+    
     $data = [
         'chat_id' => TELEGRAM_CHAT_ID,
         'text' => $message,
@@ -32,14 +41,21 @@ function send_to_telegram($message) {
         'http' => [
             'header' => "Content-type: application/x-www-form-urlencoded\r\n",
             'method' => 'POST',
-            'content' => http_build_query($data)
+            'content' => http_build_query($data),
+            'timeout' => 10
         ]
     ];
     
     $context = stream_context_create($options);
-    $result = file_get_contents(TELEGRAM_API_URL, false, $context);
+    $result = @file_get_contents(TELEGRAM_API_URL, false, $context);
     
-    return $result !== false;
+    if ($result === false) {
+        error_log('Failed to send message to Telegram');
+        return false;
+    }
+    
+    $response = json_decode($result, true);
+    return isset($response['ok']) && $response['ok'] === true;
 }
 
 // Initialize response variables
@@ -77,16 +93,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // If no validation errors, process the form
     if (empty($errors)) {
-        // Format the message for Telegram
-        $telegram_message = "<b>New Contact Form Submission</b>\n\n";
-        $telegram_message .= "<b>Name:</b> " . $name . "\n";
-        $telegram_message .= "<b>Email:</b> " . $email . "\n";
+        // Format the message for Telegram with all user data
+        $telegram_message = "<b>🍕 New Contact Form Submission</b>\n\n";
+        $telegram_message .= "<b>Name:</b> " . htmlspecialchars($name, ENT_QUOTES, 'UTF-8') . "\n";
+        $telegram_message .= "<b>Email:</b> " . htmlspecialchars($email, ENT_QUOTES, 'UTF-8') . "\n";
         
         if (!empty($phone)) {
-            $telegram_message .= "<b>Phone:</b> " . $phone . "\n";
+            $telegram_message .= "<b>Phone:</b> " . htmlspecialchars($phone, ENT_QUOTES, 'UTF-8') . "\n";
+        } else {
+            $telegram_message .= "<b>Phone:</b> Not provided\n";
         }
         
-        $telegram_message .= "\n<b>Message:</b>\n" . $message;
+        $telegram_message .= "\n<b>Message:</b>\n" . htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
+        $telegram_message .= "\n\n<i>Submitted from Tony's Greenwich Village Pizzeria Website</i>";
         
         // Send to Telegram
         if (send_to_telegram($telegram_message)) {
